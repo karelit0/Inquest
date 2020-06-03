@@ -1,0 +1,13 @@
+﻿<div class="form-group" ng-class="{'has-warning': !required, 'has-success': (required && parentForm[ctrl.controlId].$valid)||(!required && parentForm[ctrl.controlId].$dirty), 'has-error': required && parentForm[ctrl.controlId].$invalid}">
+    <label class="{{ctrl.app.labelColumnForm}} control-label" for="{{ctrl.controlId}}" style="top: 40px !important;">{{entityHeader}} :</label>
+    <div class="{{ctrl.app.inputColumnForm}}">
+        <span ng-class="{'required':required}" style="top: 40px !important;position: relative;right: 15px;"></span>
+        <div uib-timepicker ng-model="entity"
+             hour-step="ctrl.hourStep"
+             minute-step="ctrl.minStep"
+             show-meridian="ctrl.isMeridian"
+             readonly-input="true"
+             ng-change="ctrl.changed()"></div>
+        <input type="text" class="form-control" id="{{ctrl.controlId}}" name="{{ctrl.controlId}}" ng-model="entity" ng-required="required" ng-hide="1" />
+    </div>
+</div>

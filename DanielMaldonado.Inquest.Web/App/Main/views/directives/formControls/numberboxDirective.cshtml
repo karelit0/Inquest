@@ -1,0 +1,12 @@
+﻿<div class="form-group" ng-class="{'has-warning': !required, 'has-success': (required && parentForm[ctrl.controlId].$valid)||(!required && parentForm[ctrl.controlId].$dirty), 'has-error': required && parentForm[ctrl.controlId].$invalid}">
+    <label class="col-lg-4 control-label" for="{{ctrl.controlId}}">{{entityHeader}} :</label>
+    <div class="col-lg-8">
+        <span ng-class="{'required':required}"></span>
+        <input type="number" class="form-control" id="{{ctrl.controlId}}" name="{{ctrl.controlId}}" ng-model="entity" ng-required="required" ng-pattern="ctrl.patternText" placeholder="{{placeHolder}}" min="{{minValue}}" max="{{maxValue}}" ng-disabled="disable"/>
+        <div class="text-left">
+            <span class="help-block" ng-show="parentForm[ctrl.controlId].$invalid">{{helpText}}</span>
+            @*<span class="help-block" ng-show="parentForm[ctrl.controlId].$error.required">{{ctrl.localize.commonString.required}}</span>*@
+            <span class="help-block" ng-show="parentForm[ctrl.controlId].$error.pattern">{{ctrl.localize.commonString.notValidInformation}}</span>
+        </div>
+    </div>
+</div>

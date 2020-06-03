@@ -1,0 +1,11 @@
+﻿<div class="form-group">
+    <label class="col-lg-4 control-label">{{entityHeader}}</label>
+    <div class="col-lg-8">
+        <div class="radio" ng-repeat="option in optionList">
+            <label>
+                <input name="optionsRadios" id="{{entityName+''+$index}}" value="{{option.value}}" checked="" type="radio" ng-disabled="disable">
+                {{option.text}}
+            </label>
+        </div>
+    </div>
+</div>

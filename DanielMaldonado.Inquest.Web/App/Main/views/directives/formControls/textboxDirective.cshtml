@@ -1,0 +1,10 @@
+﻿<div class="form-group" ng-class="{'has-warning': !required, 'has-success': (required && parentForm[ctrl.controlId].$valid)||(!required && parentForm[ctrl.controlId].$dirty), 'has-error': required && parentForm[ctrl.controlId].$invalid}">
+    <label class="{{ctrl.app.labelColumnForm}} control-label" for="{{ctrl.controlId}}">{{entityHeader}} :</label>
+    <div class="{{ctrl.app.inputColumnForm}}">
+        <span ng-class="{'required':required}"></span>
+        <input type="text" class="form-control" id="{{ctrl.controlId}}" name="{{ctrl.controlId}}" ng-model="entity" ng-required="required" ng-pattern="patternText" placeholder="{{placeHolder}}" ng-disabled="disable" />
+        <div class="text-left">
+            <span class="help-block" ng-show="parentForm[ctrl.controlId].$invalid">{{helpText}}</span>
+        </div>
+    </div>
+</div>

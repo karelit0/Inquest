@@ -1,0 +1,91 @@
+﻿<div ng-controller="app.views.survey.fybecaSurvey as ctrl">
+    <div class="col-md-12">
+        <div class="well bs-component">
+            <form name="formManager" role="form" novalidate class="form-horizontal form-validation" ng-if="ctrl.entity !== null && ctrl.entity.survey !== null">
+                <fieldset>
+                    <legend>Sucursal</legend>
+                    <ui-select ng-model="ctrl.entity.branchOffice"
+                               theme="bootstrap"
+                               on-select="ctrl.onSelectItem($item, $model)">
+                        <ui-select-match placeholder="{{placeHolder}}">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="branchOffice in ctrl.branchOfficeList | filter: $select.search">
+                            <div ng-bind-html="branchOffice.name | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </fieldset>
+                <fieldset>
+                    <legend>Infomacion Personal</legend>
+                    <textbox-directive entity="ctrl.entity.personSurveyed.cedula"
+                                       entity-header="Cedula"
+                                       place-holder="Cedula"
+                                       help-text="Cedula"
+                                       parent-form="formManager"
+                                       required="1"
+                                       disable="0"
+                                       pattern-text="ctrl.app.pattern.cedula">
+                    </textbox-directive>
+                    <textbox-directive entity="ctrl.entity.personSurveyed.name"
+                                       entity-header="Nombre"
+                                       place-holder="Nombre"
+                                       help-text="Nombre"
+                                       parent-form="formManager"
+                                       required="1"
+                                       disable="0"
+                                       pattern-text="ctrl.app.pattern.word">
+                    </textbox-directive>
+                    <textbox-directive entity="ctrl.entity.personSurveyed.age"
+                                       entity-header="Edad"
+                                       place-holder="Edad"
+                                       help-text="Edad"
+                                       parent-form="formManager"
+                                       required="1"
+                                       disable="0"
+                                       pattern-text="ctrl.app.pattern.age">
+                    </textbox-directive>
+                    <textbox-directive entity="ctrl.entity.personSurveyed.gender"
+                                       entity-header="Genero"
+                                       place-holder="Genero"
+                                       help-text="Genero M/F"
+                                       parent-form="formManager"
+                                       required="1"
+                                       disable="0"
+                                       pattern-text="ctrl.app.pattern.gender">
+                    </textbox-directive>
+                </fieldset>
+
+                <fieldset ng-repeat="(key, value) in ctrl.entity.survey.questionList | groupBy: 'category.name'">
+                    <legend>{{key}}</legend>
+                    <div class="form-group" ng-repeat="question in value">
+                        <label class="{{ctrl.app.labelColumnForm}} control-label">{{question.name}}</label>
+                        <div class="{{ctrl.app.inputColumnForm}}" ng-switch on="question.questionType.name">
+                            <div ng-switch-when="YES/NO|NUMERIC" ng-switch-when-separator="|">
+                                <ui-select ng-model="question.selected"
+                                           theme="bootstrap"
+                                           on-select="ctrl.onSelectItem($item, $model)">
+                                    <ui-select-match placeholder="{{placeHolder}}">{{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="questionOption in question.questionType.questionOptionList | filter: $select.search | orderBy:ctrl.sorterFunc:reverse">
+                                        <div ng-bind-html="questionOption.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                            <div ng-switch-when="CHECKBOX">
+                                <div class="checkbox" ng-repeat="questionOption in question.questionType.questionOptionList | orderBy:ctrl.sorterFunc:reverse">
+                                    <label>
+                                        <input type="checkbox" ng-model="questionOption.checked">
+                                        {{questionOption.name}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <save-button-directive text-button="Enviar"
+                                   click-callback="ctrl.save"
+                                   type-button="submit"
+                                   disable="formManager.$invalid">
+            </save-button-directive>
+        </div>
+    </div>
+</div>
