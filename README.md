@@ -5,6 +5,19 @@ The idea of this project was:
 >+ Create one backend based on WebApi that allows to create questions, question type, using a category to hold them
 >+ Create one frontend based on AngularJS that allow to fill one inquest
 
+## Technologies
+
+### BackEnd
+
+>+ ABP Boilerplate framework
+>+ WebApi
+>+ EntityFramework
+
+### FrontEnd
+
+>+ AngularJS
+>+ Bootstrap
+
 ## Inquest Preview
 
 ### Inquest Empty Example 
